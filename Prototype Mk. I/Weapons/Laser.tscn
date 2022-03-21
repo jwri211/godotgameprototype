@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Weapons/laserGreen10.png" type="Texture" id=1]
+[ext_resource path="res://Weapons/Laser.gd" type="Script" id=2]
+[ext_resource path="res://Weapons/sfx_laser1.ogg" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25.5, 4.5 )
+
+[node name="Laser" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 4
+mass = 0.0102041
+gravity_scale = 0.0
+linear_velocity = Vector2( 1000, 0 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 0.5 )
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+attenuation = 2.73208
+
+[connection signal="body_entered" from="." to="." method="_on_Laser_body_entered"]
